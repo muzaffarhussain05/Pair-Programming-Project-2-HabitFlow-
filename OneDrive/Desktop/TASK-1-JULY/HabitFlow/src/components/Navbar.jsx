@@ -10,7 +10,7 @@ const Navbar = () => {
           </div>
   
           <div className="flex items-center space-x-3">
-            <button className="p-2 rounded-md border hover:bg-gray-100">
+            <button  className="p-2 rounded-md border hover:bg-gray-100">
               <FaMoon />
             </button>
             <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md">

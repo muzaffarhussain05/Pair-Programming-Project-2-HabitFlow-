@@ -1,4 +1,5 @@
 
+
 const getHeaders = (viewMode) => {
   switch (viewMode) {
     case "week":
@@ -21,10 +22,10 @@ const HabitGrid = ( {habits,viewMode})=>{
   const headers=getHeaders(viewMode)
   return (
     <div className="mt-4">
-      <div className={`grid grid-cols-${headers.length+1} text-sm text-gray-400`}>
+      <div className={`grid grid-cols-${headers.length+1} gap-6 text-sm text-gray-400`}>
         <div></div>
        {headers.map((header,idx)=>(
- <div key={idx} className="text-center whitespace-nowrap">
+ <div key={idx} className="text-start  whitespace-nowrap">
             {header}
           </div>
        ))}
