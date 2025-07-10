@@ -4,11 +4,12 @@ const AddHabitModal = ({addHabit} )=>{
   const [isOpen, setIsOpen] = useState(false);
   const [habitName, setHabitName] = useState("");
   const [frequency, setFrequency] = useState("daily");
+  const [habitColor, setHabitColor] = useState("bg-orange-400");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!habitName) return;
-    addHabit({ name: habitName, color: "bg-orange-400", frequency }); // you can randomize color
+    addHabit({ name: habitName, color:habitColor, frequency:frequency }); // you can randomize color
     setHabitName("");
     setFrequency("daily");
     setIsOpen(false);
@@ -29,6 +30,7 @@ const AddHabitModal = ({addHabit} )=>{
             onSubmit={handleSubmit}
             className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm"
           >
+            
             <h2 className="text-xl font-semibold mb-4">Add New Habit</h2>
 
             <label className="block mb-2 text-sm font-medium">Habit Name</label>
@@ -40,7 +42,26 @@ const AddHabitModal = ({addHabit} )=>{
               placeholder="e.g. Read, Workout"
               required
             />
-
+<label className="block mb-2 text-sm font-medium">Color</label>
+<div className="flex gap-2 mb-6">
+  {[
+    "bg-orange-400",
+    "bg-purple-500",
+    "bg-cyan-400",
+    "bg-blue-500",
+    "bg-green-500",
+    "bg-pink-500",
+  ].map((color) => (
+    <button
+      key={color}
+      type="button"
+      onClick={() => setHabitColor(color)}
+      className={`w-6 h-6 rounded-full border-2 ${
+        habitColor === color ? "border-black" : "border-transparent"
+      } ${color}`}
+    />
+  ))}
+</div>
             <label className="block mb-2 text-sm font-medium">Frequency</label>
             <select
               value={frequency}
