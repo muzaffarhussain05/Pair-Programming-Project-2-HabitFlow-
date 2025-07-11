@@ -1,21 +1,18 @@
-import HabitDashboard from '../components/Habitdashboard'
-import AddHabitModal from '../components/Addmodel'
-import React from 'react'
-import { useState } from 'react'
+// File: src/pages/Addhabits.jsx
+import React, { useContext } from "react";
+import { HabitContext } from "../context/HabitContext";
+import HabitDashboard from "../components/Habitdashboard";
+import AddHabitModal from "../components/AddHabitModal";
 
 const Addhabits = () => {
-     const [habits, setHabits] = useState([
-  ]);
+  const { habits, addHabit } = useContext(HabitContext);
 
-  const addHabit = (newHabit) => {
-    setHabits((prev) => [...prev, { ...newHabit, progress: [] }]);
-  };
   return (
- <div>
-      <HabitDashboard  habits={habits} />
-      <AddHabitModal    addHabit={addHabit}/>
+    <div>
+      <HabitDashboard habits={habits} />
+      <AddHabitModal addHabit={addHabit} />
     </div>
-  )
-}
+  );
+};
 
 export default Addhabits;
