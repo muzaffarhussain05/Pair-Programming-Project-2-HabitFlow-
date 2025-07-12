@@ -32,7 +32,7 @@ A minimal and intuitive habit tracker built with React, Firebase, and Tailwind C
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/yourusername/habitflow.git
+git clone https://github.com/muzaffarhussain05/Pair-Programming-Project-2-HabitFlow-.git
 cd habitflow
 npm install
 
