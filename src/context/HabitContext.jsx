@@ -78,7 +78,7 @@ const HabitProvider = ({ children }) => {
 
   /* ───────────────  Fetch Motivational Quote  ─────────────── */
   useEffect(() => {
-    fetch("https://zenquotes.io/api/random")
+    fetch("https://corsproxy.io/?https://zenquotes.io/api/today")
       .then((res) => res.json())
       .then((data) => {
         if (data && data[0] && data[0].q && data[0].a) {
