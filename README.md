@@ -2,8 +2,9 @@
 
 A minimal and intuitive habit tracker built with React, Firebase, and Tailwind CSS. HabitFlow helps you stay consistent by tracking your daily progress, visualizing streaks, and setting a bedtime goal—all from a clean and responsive interface.
 
-![HabitFlow Screenshot](./public/demo.png) 
+![HabitFlow Screenshot](./public/demo.jpg) 
 ---
+
 
 ## 🚀 Features
 
