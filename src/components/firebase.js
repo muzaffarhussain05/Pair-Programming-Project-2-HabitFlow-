@@ -1,20 +1,16 @@
-// Import the functions you need from the SDKs you need
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 // File: src/firebase.js
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore"; // ✅ Add this import
+import { getFirestore } from "firebase/firestore";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
-// Your web app's Firebase configuration
+// Firebase config using environment variables
 const firebaseConfig = {
-  apiKey: "AIzaSyDau_uLAJit09ub2R6uZYDM2Aa-TRgOYLg",
-  authDomain: "habitflow-pair-programming.firebaseapp.com",
-  projectId: "habitflow-pair-programming",
-  storageBucket: "habitflow-pair-programming.firebasestorage.app",
-  messagingSenderId: "40400409725",
-  appId: "1:40400409725:web:4248162d60c335dd14cd14"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -23,4 +19,3 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 export { db, auth, provider };
-// Initialize Firebase
