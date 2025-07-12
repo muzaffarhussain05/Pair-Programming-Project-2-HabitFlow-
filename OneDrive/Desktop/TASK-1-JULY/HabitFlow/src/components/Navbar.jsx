@@ -1,25 +1,46 @@
-import React from 'react'
-import { FaMoon } from "react-icons/fa";
-const Navbar = () => {
-  return (
-  <>
-  <nav className="flex items-center justify-between px-6 md:px-16 py-4 border-b">
-          <div className="flex items-center space-x-2">
-            <img src="/logo.svg" alt="Habitflow Logo" className="w-6 h-6" />
-            <span className="text-xl font-semibold">Habitflow</span>
-          </div>
-  
-          <div className="flex items-center space-x-3">
-            <button  className="p-2 rounded-md border hover:bg-gray-100">
-              <FaMoon />
-            </button>
-            <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md">
-              Login
-            </button>
-          </div>
-        </nav> 
-        </>
-  )
-}
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
-export default Navbar
+const Navbar = () => {
+  const { user, login, logout } = useAuth();
+
+  return (
+    <nav className="w-full px-6 md:px-16 py-4 bg-white border-b shadow-sm flex items-center justify-between sticky top-0 z-20">
+      <Link
+        to="/"
+        className="text-2xl font-extrabold text-indigo-700 hover:text-indigo-900 transition"
+      >
+        HabitFlow
+      </Link>
+
+      {user ? (
+        <div className="flex items-center gap-3">
+          <img
+            src={user.photoURL}
+            alt="avatar"
+            className="w-9 h-9 rounded-full border object-cover"
+          />
+          <span className="hidden sm:inline text-gray-700 font-medium">
+            {user.displayName}
+          </span>
+          <Link
+            onClick={logout}
+            to="/"
+            className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 text-sm rounded-md shadow transition"
+          >
+            Log out
+          </Link>
+        </div>
+      ) : (
+        <button
+          onClick={login}
+          className="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 text-sm rounded-md shadow transition"
+        >
+          Sign in with Google
+        </button>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;

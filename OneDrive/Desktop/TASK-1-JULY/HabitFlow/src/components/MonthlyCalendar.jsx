@@ -31,9 +31,7 @@ export default function MonthlyCalendar() {
     // Build progressData map
     const progressData = {};
     for (let day = 1; day <= daysInMonth; day++) {
-      const iso = new Date(year, month, day)
-        .toISOString()
-        .slice(0, 10); // YYYY-MM-DD
+      const iso = new Date(year, month, day).toISOString().slice(0, 10); // YYYY-MM-DD
       const total = habits.length || 1;
       const completed = habits.filter((h) => h.progress?.[iso]).length;
       progressData[iso] = `${Math.round((completed / total) * 100)}%`;
@@ -77,10 +75,10 @@ export default function MonthlyCalendar() {
         onNext={nextMonth}
       />
 
-      <div className="grid grid-cols-7 gap-px border border-blue-100 text-center text-sm text-blue-600 select-none mt-4">
+      <div className="grid grid-cols-7 gap-px border border-blue-100 text-center text-xs text-blue-600 select-none mt-2">
         {/* Headers */}
         {daysOfWeek.map((d) => (
-          <div key={d} className="py-2 font-semibold border border-blue-100">
+          <div key={d} className="py-1 font-semibold border border-blue-100">
             {d}
           </div>
         ))}
@@ -89,14 +87,14 @@ export default function MonthlyCalendar() {
         {cells.map((cell, idx) => (
           <div
             key={idx}
-            className={`aspect-square border border-blue-100 flex items-center justify-center ${
+            className={`border border-blue-100 h-14 sm:h-12 flex items-center justify-center ${
               cell?.iso === todayIso ? "bg-green-500 text-black" : "text-gray-400"
             }`}
           >
             {cell ? (
-              <div className="flex flex-col items-center justify-between h-full py-1">
-                <div>{cell.day}</div>
-                <div className="text-xs font-semibold text-blue-600 mt-auto">
+              <div className="flex flex-col items-center justify-between h-full py-0.5">
+                <div className="text-[11px]">{cell.day}</div>
+                <div className="text-[10px] font-semibold text-blue-600 mt-auto">
                   {cell.progress}
                 </div>
               </div>

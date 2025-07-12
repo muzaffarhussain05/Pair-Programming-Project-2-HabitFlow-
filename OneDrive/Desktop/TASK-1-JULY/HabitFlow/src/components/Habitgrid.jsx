@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import WeekComponent from "./WeekComponent";
 import MonthlyCalendar from "./MonthlyCalendar";
 import YearComponent from "./YearComponent";
 import AddHabit from "./AddHabit";
+import { HabitContext } from "../context/HabitContext"; // adjust path
 
-const HabitGrid = ({ habits = [] }) => {
+const HabitGrid = () => {
+  const { habits } = useContext(HabitContext); // 👈 Use context here
   const [viewMode, setViewMode] = useState("week");
 
   return (
     <div>
       {/* Tabs */}
-
       <div className="flex md:flex-row  flex-col gap-2 md:gap-7 mb-6 items-center">
         <div>
           {["week", "month", "year"].map((mode) => (
@@ -30,7 +31,6 @@ const HabitGrid = ({ habits = [] }) => {
         <div className="md:order-2 order-1">
           <AddHabit />
         </div>
-        <div></div>
       </div>
 
       {viewMode === "week" && <WeekComponent habits={habits} />}

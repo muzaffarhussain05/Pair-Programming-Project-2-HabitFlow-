@@ -22,12 +22,11 @@ export default function AddHabitModal({ isOpen, onClose }) {
     if (!habitName.trim()) return;
 
     const newHabit = {
-      id: Date.now().toString(),
       title: habitName.trim(),
       frequency,
       color: habitColor,
-      createdAt: new Date().toISOString().slice(0, 10),
-      progress: {},
+      createdAt: Date.now(), // numeric for Firestore ordering
+      progress: {},          // optional – will be ensured by context
     };
 
     addHabit(newHabit);

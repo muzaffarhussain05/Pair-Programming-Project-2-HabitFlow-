@@ -1,4 +1,3 @@
-// File: src/components/YearComponent.jsx
 import { useContext, useState, useMemo } from "react";
 import { HabitContext } from "../context/HabitContext";
 import DateRangeNav from "./DateRangeNav";
@@ -10,23 +9,18 @@ export default function YearComponent() {
   const prevYear = () => setViewYear((y) => y - 1);
   const nextYear = () => setViewYear((y) => y + 1);
 
-  const filteredHabits = useMemo(() => {
-    return habits.map((habit) => {
-      const entries = Object.entries(habit.progress || {}).filter(([date]) =>
-        date.startsWith(viewYear.toString())
-      );
-      const completed = entries.filter(([, done]) => done === true).length;
-      const total = entries.length;
-      return { ...habit, completed, total };
-    });
-  }, [habits, viewYear]);
+  const filteredAndSorted = useMemo(() => {
+    const start = new Date(viewYear, 0, 1).getTime();
+    const end = new Date(viewYear + 1, 0, 1).getTime();
 
-  if (!habits || habits.length === 0)
-    return <p className="text-gray-500">No habits yet.</p>;
+    return [...habits]
+      .filter((h) => h.createdAt >= start && h.createdAt < end)
+      .sort((a, b) => (b.streak ?? 0) - (a.streak ?? 0));
+  }, [habits, viewYear]);
 
   return (
     <div className="space-y-6">
-      {/* Year nav */}
+      {/* Always show navigation */}
       <DateRangeNav
         start={`${viewYear}`}
         end=""
@@ -34,24 +28,28 @@ export default function YearComponent() {
         onNext={nextYear}
       />
 
-      {/* Habit list */}
-      {filteredHabits.map((habit) => (
-        <div
-          key={habit.id}
-          className="flex items-center gap-3 p-4 rounded-lg shadow border"
-        >
-          <span
-            className="inline-block h-4 w-4 rounded-full"
-            style={{ backgroundColor: habit.color }}
-          ></span>
-          <span className="text-gray-800 font-medium text-base flex-1">
-            {habit.title}
-          </span>
-          <span className="text-gray-700 font-semibold text-sm">
-            {habit.completed}/{habit.total}
-          </span>
-        </div>
-      ))}
+      {/* Conditional habit list or message */}
+      {filteredAndSorted.length === 0 ? (
+        <p className="text-gray-500">No habits created in {viewYear}.</p>
+      ) : (
+        filteredAndSorted.map((habit) => (
+          <div
+            key={habit.id}
+            className="flex items-center gap-3 p-4 rounded-lg shadow border"
+          >
+            <span
+              className="inline-block h-4 w-4 rounded-full"
+              style={{ backgroundColor: habit.color }}
+            />
+            <span className="flex-1 text-gray-800 font-medium">
+              {habit.title}
+            </span>
+            <span className="text-sm font-bold text-orange-600">
+              {habit.streak ?? 0}&nbsp;🔥
+            </span>
+          </div>
+        ))
+      )}
     </div>
   );
 }

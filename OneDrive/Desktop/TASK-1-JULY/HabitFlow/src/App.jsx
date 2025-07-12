@@ -1,22 +1,19 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-
-import Home from "./pages/Home";
-import Addhabits from "./pages/Addhabits";
 import Navbar from "./components/Navbar";
-import HabitProvider from "./context/HabitContext";
-
-const App = () => {
+import AppRoutes from "./routes/AppRoutes";
+import { AuthProvider } from "./context/AuthContext";
+import HabitProvider  from "./context/HabitContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+function App() {
   return (
-    <HabitProvider>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-
-        <Route path="/Addhabits" element={<Addhabits />} />
-      </Routes>
-    </HabitProvider>
+    <AuthProvider>
+      <HabitProvider>
+      <ToastContainer position="top-right" autoClose={3000} />
+        <Navbar />
+        <AppRoutes />
+      </HabitProvider>
+    </AuthProvider>
   );
-};
+}
 
 export default App;
